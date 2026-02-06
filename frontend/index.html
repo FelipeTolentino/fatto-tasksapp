@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tarefas</title>
+
+    <link href="./src/output.css" rel="stylesheet">
+  </head>
+
+  <body class="bg-white min-h-screen flex flex-col">
+
+    <span class="text-left pl-35 my-2 font-bold text-gray-700 text-2xl">Listagem de Tarefas</span>
+
+    <div class="flex flex-1">
+      
+      <!-- Tasks Table -->
+      <div class="max-w-4xl mx-auto bg-gray-100 rounded-2xl shadow flex flex-col flex-1">
+
+        <!-- Table Header -->
+        <div class="overflow-hidden rounded">
+          <table class="w-full">
+            <thead class="sticky top-0">
+              <tr class="grid grid-cols-[2fr_1fr_1fr_1fr]">
+                <th class="pl-6 py-2 text-left">Nome</th>
+                <th class="pr-6 py-2 text-left">Custo</th>
+                <th class="py-2 text-left">Data Limite</th>
+                <th class="py-2 text-center">Ações</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+
+        <div id="tasks-list" class="flex flex-col gap-1 px-1 flex-1"></div>
+        
+        <!-- Actions Footer -->
+        <div class="flex justify-between pt-4 px-4 pb-2 items-center">
+          <div id="total" class="font-semibold text-2xl"></div>
+
+          <button onclick="openCreationModal()" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-2 rounded-4xl">
+            Incluir
+          </button>
+        </div>
+      
+      </div>
+
+    </div>
+
+    <!-- Create/Edit Task Modal -->
+    <div id="task-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center">
+      <div class="bg-white p-6 rounded-2xl w-96">
+        
+        <h2 id="task-modal-title" class="text-xl font-bold mb-4"></h2>
+        
+        <input id="task-name" class="border border-gray-500 p-2 w-full mb-2 rounded-4xl" placeholder="Nome" />
+
+        <input id="task-cost" type="text" inputmode="decimal" placeholder="R$ 0,00"
+        class="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none
+               [&::-webkit-inner-spin-button]:appearance-none
+               border border-gray-500 p-2 w-full mb-2 rounded-4xl" placeholder="Custo" />
+
+        <input id="task-deadline" type="date" class="border border-gray-500 p-2 w-full mb-4 rounded-4xl text-gray-500" />
+        
+        <!-- Modal Actions -->
+        <div class="flex justify-end gap-2">
+          <button onclick="save()" class="px-8 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-4xl ">
+            Salvar
+          </button>
+          <button onclick="closeTaskModal()" class="px-4 py-2 rounded-4xl bg-gray-300 hover:bg-gray-400">
+            Cancelar
+          </button>
+        </div>
+
+        <div id="task-modal-error" class="text-red-500 text-center mt-4"></div>
+        
+      </div>
+    </div>
+    
+    <!-- Confirm Delete Modal -->
+    <div id="confirm-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center">
+      <div class="bg-white p-6 rounded-2xl w-96">
+        
+        <h2 class="text-xl font-bold mb-4">Deletar tarefa?</h2>
+        
+        <span>Os dados serão permamentemente perdidos</span>
+        
+        <!-- Modal Actions -->
+        <div class="flex justify-end gap-2 mt-4">
+          <button id="confirm-button" onclick="modalConfirm()" class="px-8 py-2 bg-red-500 hover:bg-red-600 text-white rounded-4xl ">
+            Deletar
+          </button>
+          <button onclick="closeConfirmModal()" class="px-4 py-2 rounded-4xl bg-gray-300 hover:bg-gray-400">
+            Cancelar
+          </button>
+        </div>
+        
+      </div>
+    </div>
+    
+
+    <script src="js/cost_input.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/sortable.min.js"></script>
+    <script src="js/dragdrop.js"></script>
+  </body>
+
+</html>
