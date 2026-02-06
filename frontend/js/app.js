@@ -99,14 +99,16 @@ function openEditingModal(id) {
 }
 
 function openTaskModal() {
-  document.getElementById("task-name").value = "";
-  document.getElementById("task-cost").value = "";
-  document.getElementById("task-deadline").value = "";
-
   document.getElementById("task-modal").classList.remove("hidden");
 }
 
 function closeTaskModal() {
+  document.getElementById("task-name").value = "";
+  document.getElementById("task-cost").value = "";
+  document.getElementById("task-deadline").value = "";
+
+  document.getElementById("task-modal-error").classList.add("hidden");
+
   document.getElementById("task-modal").classList.add("hidden");
 }
 
