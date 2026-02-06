@@ -1,4 +1,4 @@
-const API = "http://localhost:3000/tarefas";
+const API = "https://fatto-tasksapp-backend.onrender.com/tarefas";
 
 async function listTasks() {
   return fetch(API).then(res => res.json());
