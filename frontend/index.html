@@ -18,16 +18,12 @@
 
         <!-- Table Header -->
         <div class="overflow-hidden rounded-2xl">
-          <table class="w-full">
-            <thead class="sticky top-0">
-              <tr class="grid grid-cols-[2fr_1fr_1fr_1fr]">
-                <th class="pl-6 py-2 text-left">Nome</th>
-                <th class="pr-6 py-2 text-left">Custo</th>
-                <th class="py-2 text-left">Data Limite</th>
-                <th class="py-2 text-center">Ações</th>
-              </tr>
-            </thead>
-          </table>
+          <div class="grid grid-cols-[2fr_1fr_1fr_1fr] sticky top-0 bg-gray-200 px-6 py-2 font-bold">
+            <div class="pl-6">Nome</div>
+            <div>Custo</div>
+            <div>Data Limite</div>
+            <div class="text-center">Ações</div>
+          </div>
         </div>
 
         <div id="tasks-list" class="flex flex-col gap-1 px-1 flex-1"></div>

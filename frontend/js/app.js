@@ -62,7 +62,7 @@ function renderTask(task) {
   card.className = cardClasses;
 
   card.innerHTML = `
-    <span class="truncate">${task.name}</span>
+    <span class="truncate">ID: ${task.id} - ${task.name}</span>
     <span class="">${formatCurrency(task.cost)}</span>
     <span class="">${formatDate(task.deadline)}</span>
 
