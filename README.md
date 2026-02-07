@@ -6,6 +6,17 @@ O respositório contem o backend e o frontend
 
 ---
 
+## Deploy
+
+O projeto está hospedado utilizando serviços de deploy em nuvem:
+
+**Backend:** Render
+
+**Frontend:** Vercel
+
+# Observação sobre o Render:
+O backend hospedado no Render pode apresentar uma pequena demora na primeira requisição após longos períodos de inatividade. Isso acontece porque o serviço pode entrar em modo de economia de recursos quando não está sendo utilizado, voltando ao normal após a primeira chamada.
+
 ## Tecnologias Utilizadas
 
 **Backend:**
