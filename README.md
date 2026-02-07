@@ -14,7 +14,7 @@ O projeto está hospedado utilizando serviços de deploy em nuvem:
 
 **Frontend:** Vercel
 
-# Observação sobre o Render:
+## Observação sobre o Render:
 O backend hospedado no Render pode apresentar uma pequena demora na primeira requisição após longos períodos de inatividade. Isso acontece porque o serviço pode entrar em modo de economia de recursos quando não está sendo utilizado, voltando ao normal após a primeira chamada.
 
 ## Tecnologias Utilizadas
