@@ -28,7 +28,7 @@ npm install
 
 2. Configure o banco de dados no arquivo .env:
 ```bash
-DATABSE_URL="url_do_banco"
+DATABASE_URL="url_do_banco"
 ```
 
 3. Rode as migrations do Prisma:
@@ -40,7 +40,7 @@ npx prisma migrate dev
 ```bash
 npm run dev
 ```
-O backend estará rodando em http://localhost:3000
+O backend estará rodando em [http://localhost:3000](http://localhost:3000)
 
 ### 2. Frontend
 
