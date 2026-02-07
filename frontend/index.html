@@ -9,35 +9,28 @@
 
   <body class="bg-white min-h-screen flex flex-col">
 
-    <span class="text-center my-2 font-bold text-gray-700 text-2xl">Listagem de Tarefas</span>
+    <span class="text-center font-bold text-gray-700 text-2xl">Listagem de Tarefas</span>
 
-    <div class="flex flex-1">
-      
-      <!-- Tasks Table -->
-      <div class="max-w-4xl mx-auto bg-gray-100 rounded-2xl shadow flex flex-col flex-1">
+    <div class="max-w-4xl w-full mx-auto bg-gray-100 rounded-2xl px-2 flex flex-col flex-1">
 
-        <!-- Table Header -->
-        <div class="overflow-hidden rounded-2xl">
-          <div class="grid grid-cols-[2fr_1fr_1fr_1fr] sticky top-0 bg-gray-200 px-6 py-2 font-bold">
-            <div class="pl-6">Nome</div>
-            <div>Custo</div>
-            <div>Data Limite</div>
-            <div class="text-center">Ações</div>
-          </div>
+        <div class="grid grid-cols-[60px_80px_3fr_1fr_1fr_2fr] font-bold py-3 px-2">
+          <div></div>
+          <div class="text-center">ID</div>
+          <div>Nome</div>
+          <div class="text-ceter">Custo</div>
+          <div class="text-center">Data Limite</div>
+          <div class="text-center">Ações</div>
         </div>
 
-        <div id="tasks-list" class="flex flex-col gap-1 px-1 flex-1"></div>
-        
-        <!-- Actions Footer -->
-        <div class="flex justify-between pt-4 px-4 pb-2 items-center">
+        <div id="tasks-list" class="flex flex-col gap-2 flex-1 overflow-auto"></div>
+
+        <div class="flex justify-between items-center py-2 px-2">
           <div id="total" class="font-semibold text-2xl"></div>
 
           <button onclick="openCreationModal()" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-2 rounded-4xl">
             Incluir
           </button>
         </div>
-      
-      </div>
 
     </div>
 

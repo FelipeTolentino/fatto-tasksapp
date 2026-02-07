@@ -41,14 +41,13 @@ function renderTask(task) {
   card.dataset.id = task.id;
   let cardClasses = `
     task-card
-    px-5
-    py-2
     bg-white
+    py-2
+    px-2
     rounded-4xl
     grid
-    grid-cols-[2fr_1fr_1fr_1fr]
+    grid-cols-[60px_80px_3fr_1fr_1fr_2fr]
     items-center
-    gap-4
     cursor-grab
   `
 
@@ -62,20 +61,24 @@ function renderTask(task) {
   card.className = cardClasses;
 
   card.innerHTML = `
-    <span class="truncate">ID: ${task.id} - ${task.name}</span>
+    <div class="flex items-center">
+      <button onclick="moveUp(${task.id})" class="">⬆️</button>
+       <button onclick="moveDown(${task.id})" class="">⬇️</button>
+    </div>
+    <div class="text-center">${task.id}</div>
+    <span class="truncate">${task.name}</span>
     <span class="">${formatCurrency(task.cost)}</span>
-    <span class="">${formatDate(task.deadline)}</span>
-
-  <div class="flex gap-3 justify-end">
-    <button onclick="openEditingModal(${task.id})"
-      class="bg-orange-300 px-3 py-1 rounded-2xl hover:bg-orange-400 transition">
-      Editar
-    </button>
-    <button onclick="openConfirmModal(${task.id})"
-      class="bg-red-400 text-white px-3 py-0 rounded-2xl hover:bg-red-500 transition">
-      Excluir
-    </button>
-  </div>
+    <span class="text-center">${formatDate(task.deadline)}</span>
+    <div class="flex gap-3 justify-center">
+      <button onclick="openEditingModal(${task.id})"
+        class="bg-orange-300 px-3 py-1 rounded-2xl hover:bg-orange-400 transition">
+        Editar
+      </button>
+      <button onclick="openConfirmModal(${task.id})"
+        class="bg-red-400 text-white px-3 py-0 rounded-2xl hover:bg-red-500 transition">
+        Excluir
+      </button>
+    </div>
   `
 
   return card;
@@ -169,6 +172,32 @@ async function modalConfirm(id) {
 
 async function closeConfirmModal() {
   document.getElementById("confirm-modal").classList.add("hidden");
+}
+
+async function moveUp(id) {
+  const tasks = document.getElementById("tasks-list");
+  const card = tasks.querySelector(`[data-id='${id}']`);
+
+  if (!card) return;
+
+  const prev = card.previousElementSibling;
+  if (prev) {
+    tasks.insertBefore(card, prev);
+    updateTasksOrder();
+  }
+}
+
+async function moveDown(id) {
+  const tasks = document.getElementById("tasks-list");
+  const card = tasks.querySelector(`[data-id='${id}']`);
+
+  if (!card) return;
+
+  const next = card.nextElementSibling;
+  if (next) {
+    tasks.insertBefore(next, card);
+    updateTasksOrder();
+  }
 }
 
 load();
