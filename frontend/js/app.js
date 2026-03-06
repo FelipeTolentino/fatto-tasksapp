@@ -51,10 +51,10 @@ function renderTask(task) {
        <button onclick="moveDown(${task.id})" class="">⬇️</button>
     </td>
     <td class="text-center">${task.id}</td>
-    <td class="whitespace-nowrap">${task.name}</td>
+    <td class="whitespace-nowrap px-0">${task.name}</td>
     <td class="whitespace-nowrap">${formatCurrency(task.cost)}</td>
     <td class="text-center">${formatDate(task.deadline)}</td>
-    <td class="gap-3 justify-center flex items-center">
+    <td class="gap-3 justify-center flex">
       <button onclick="openEditingModal(${task.id})"
         class="bg-orange-300 px-3 py-1 rounded-2xl hover:bg-orange-400 transition">
         Editar
