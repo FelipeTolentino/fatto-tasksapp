@@ -42,6 +42,7 @@ function renderTask(task) {
 
   if (task.cost >= 1000) {
    tableRow.classList.add("expensive")
+   tableRow.classList.add("cursor-grab")
   }
 
   tableRow.innerHTML = `
