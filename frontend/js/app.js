@@ -188,13 +188,13 @@ async function moveUp(id) {
 
 async function moveDown(id) {
   const table = document.getElementById("table-body");
-  const tableRow = tasks.querySelector(`[data-id='${id}']`);
+  const tableRow = table.querySelector(`[data-id='${id}']`);
 
   if (!tableRow) return;
 
   const next = tableRow.nextElementSibling;
   if (next) {
-    table.insertBefore(next, card);
+    table.insertBefore(next, tableRow);
     updateTasksOrder();
   }
 }
