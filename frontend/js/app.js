@@ -45,7 +45,7 @@ function renderTask(task) {
   }
 
   tableRow.innerHTML = `
-    <td class="inline-flex items-center">
+    <td class=" items-center">
       <button onclick="moveUp(${task.id})" class="">⬆️</button>
        <button onclick="moveDown(${task.id})" class="">⬇️</button>
     </td>
@@ -53,7 +53,7 @@ function renderTask(task) {
     <td class="whitespace-nowrap">${task.name}</td>
     <td class="whitespace-nowrap">${formatCurrency(task.cost)}</td>
     <td class="text-center">${formatDate(task.deadline)}</td>
-    <td class="inline-flex gap-3 justify-center">
+    <td class="gap-3 justify-center flex items-center">
       <button onclick="openEditingModal(${task.id})"
         class="bg-orange-300 px-3 py-1 rounded-2xl hover:bg-orange-400 transition">
         Editar
