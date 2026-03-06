@@ -2,35 +2,74 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <title>Tarefas</title>
+    <title>Listagem de Tarefas</title>
 
     <link href="./src/output.css" rel="stylesheet">
+
+    <style>
+      table {
+        border-collapse: separate;
+        border-spacing: 0 6px;
+      }
+
+      #table-body td {
+        padding: 8px 12px;
+        background: white;
+      }
+
+      #table-body td:first-child {
+        border-radius: 1rem 0 0 1rem;
+      }
+
+      #table-body td:last-child {
+        border-radius: 0 1rem 1rem 0;
+      }
+
+      #table-body tr.expensive td {
+        background: #fef9c3;
+      }
+
+      #table-body tr.expensive:hover td{
+        background: #fef08a;
+      }
+
+      #table-body tr:not(.expensive):hover td {
+        background: #d1d5db;
+      }
+    </style>
+
   </head>
 
-  <body class="bg-white min-h-screen flex flex-col">
+  <body class="bg-white min-h-screen flex flex-col items-center">
 
     <span class="text-center font-bold text-gray-700 text-2xl my-2">Listagem de Tarefas</span>
 
-    <div class="max-w-4xl w-full mx-auto bg-gray-100 rounded-2xl px-2 flex flex-col flex-1 my-2">
+    <div class="min-w-4xl bg-gray-100 rounded-2xl px-2 flex flex-col flex-1 basis-auto my-2 min-h-0">
+      
+      <div class="flex-1 overflow-y-auto min-h-0 w-full">
+        <table class="min-w-full w-max">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="text-center">ID</th>
+              <th class="text-left">Nome</th>
+              <th>Custo</th>
+              <th>Data Limite</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+      
 
-        <div class="grid grid-cols-[60px_80px_3fr_1fr_1fr_2fr] font-bold py-3 px-2">
-          <div></div>
-          <div class="text-center">ID</div>
-          <div>Nome</div>
-          <div class="text-ceter">Custo</div>
-          <div class="text-center">Data Limite</div>
-          <div class="text-center">Ações</div>
-        </div>
+      <div class="flex justify-between items-center py-2 px-2">
+        <div id="total" class="font-semibold text-2xl"></div>
 
-        <div id="tasks-list" class="flex flex-col gap-2 flex-1 overflow-auto"></div>
-
-        <div class="flex justify-between items-center py-2 px-2">
-          <div id="total" class="font-semibold text-2xl"></div>
-
-          <button onclick="openCreationModal()" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-2 rounded-4xl">
-            Incluir
-          </button>
-        </div>
+        <button onclick="openCreationModal()" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-2 rounded-4xl">
+          Incluir
+        </button>
+      </div>
 
     </div>
 
@@ -77,7 +116,7 @@
           <button id="confirm-button" onclick="modalConfirm()" class="px-8 py-2 bg-red-500 hover:bg-red-600 text-white rounded-4xl ">
             Deletar
           </button>
-          <button onclick="closeConfirmModal()" class="px-4 py-2 rounded-4xl bg-gray-300 hover:bg-gray-400">
+          <button id="cancel-button" onclick="closeConfirmModal()" class="px-4 py-2 rounded-4xl bg-gray-300 hover:bg-gray-400">
             Cancelar
           </button>
         </div>

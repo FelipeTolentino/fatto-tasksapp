@@ -1,9 +1,9 @@
 function initDragAndDrop() {
-  const tasks = document.getElementById("tasks-list");
+  const table = document.getElementById("table-body");
 
-  if (!tasks) return;
+  if (!table) return;
 
-  new Sortable(tasks, {
+  new Sortable(table, {
 
     animation: 150,
     ghostClass: "opacity-150",
@@ -16,12 +16,12 @@ function initDragAndDrop() {
 }
 
 async function updateTasksOrder() {
-  const tasks = document.getElementById("tasks-list");
+  const table = document.getElementById("table-body");
 
-  const cards = [...tasks.children];
+  const tableRows = [...table.children];
 
-  const newOrder = cards.map((card, index) => ({
-    id: Number(card.dataset.id),
+  const newOrder = tableRows.map((row, index) => ({
+    id: Number(row.dataset.id),
     order: index + 1
   }));
 

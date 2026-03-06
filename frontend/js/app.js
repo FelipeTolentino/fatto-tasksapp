@@ -18,15 +18,15 @@ async function load() {
 }
 
 function render() {
-  const container = document.getElementById("tasks-list");
-  container.innerHTML = "";
+  const tableBody = document.getElementById("table-body");
+  tableBody.innerHTML = "";
 
   let total = 0;
 
   tasks.forEach(task => {
     total += task.cost;
-
-    container.appendChild(renderTask(task));
+    
+    tableBody.appendChild(renderTask(task));
   });
 
   document.getElementById("total").innerText = 
@@ -36,57 +36,46 @@ function render() {
 }
 
 function renderTask(task) {
-  const card = document.createElement("div");
+  const tableRow = document.createElement("tr");
 
-  card.dataset.id = task.id;
-  let cardClasses = `
-    task-card
-    bg-white
-    py-2
-    px-2
-    rounded-4xl
-    grid
-    grid-cols-[60px_80px_3fr_1fr_1fr_2fr]
-    items-center
-    cursor-grab
-  `
+  tableRow.dataset.id = task.id;
 
   if (task.cost >= 1000) {
-    cardClasses += " bg-yellow-100 hover:bg-yellow-200"
-  }
-  else {
-    cardClasses += " hover:bg-gray-300"
+   tableRow.classList.add("expensive")
   }
 
-  card.className = cardClasses;
-
-  card.innerHTML = `
-    <div class="flex items-center">
+  tableRow.innerHTML = `
+    <td class="inline-flex items-center">
       <button onclick="moveUp(${task.id})" class="">⬆️</button>
        <button onclick="moveDown(${task.id})" class="">⬇️</button>
-    </div>
-    <div class="text-center">${task.id}</div>
-    <span class="truncate">${task.name}</span>
-    <span class="">${formatCurrency(task.cost)}</span>
-    <span class="text-center">${formatDate(task.deadline)}</span>
-    <div class="flex gap-3 justify-center">
+    </td>
+    <td class="text-center">${task.id}</td>
+    <td class="whitespace-nowrap">${task.name}</td>
+    <td class="whitespace-nowrap">${formatCurrency(task.cost)}</td>
+    <td class="text-center">${formatDate(task.deadline)}</td>
+    <td class="inline-flex gap-3 justify-center">
       <button onclick="openEditingModal(${task.id})"
         class="bg-orange-300 px-3 py-1 rounded-2xl hover:bg-orange-400 transition">
         Editar
       </button>
       <button onclick="openConfirmModal(${task.id})"
-        class="bg-red-400 text-white px-3 py-0 rounded-2xl hover:bg-red-500 transition">
+        class="bg-red-400 text-white px-3 py-1 rounded-2xl hover:bg-red-500 transition">
         Excluir
       </button>
-    </div>
+    </td>
   `
 
-  return card;
+  return tableRow;
 }
 
 function openCreationModal() {
   taskInEditing = null;
   document.getElementById("task-modal-title").innerText = "Nova Tarefa";
+  
+  requestAnimationFrame(() => {
+    document.getElementById("task-name").focus();
+  });
+  
   openTaskModal();
 }
 
@@ -98,6 +87,11 @@ function openEditingModal(id) {
   document.getElementById("task-deadline").value = taskInEditing.deadline.split("T")[0];
 
   document.getElementById("task-modal-title").innerText = "Editar Tarefa";
+
+  requestAnimationFrame(() => {
+    document.getElementById("task-name").focus();
+  });
+
   openTaskModal();
 }
 
@@ -155,14 +149,18 @@ async function deleteT(id) {
 
 function showModalError(msg) {
   const elem = document.getElementById("task-modal-error");
-  console.log(elem);
+
   elem.innerText = msg;
   elem.classList.remove("hidden");
 }
 
 function openConfirmModal(id) {
-  document.getElementById("confirm-button").setAttribute("onclick", `modalConfirm(${id})`);
+  const confirmBtn = document.getElementById("confirm-button").setAttribute("onclick", `modalConfirm(${id})`);
   document.getElementById("confirm-modal").classList.remove("hidden");
+
+ requestAnimationFrame(() => {
+    document.getElementById("cancel-button").focus();
+  });
 }
 
 async function modalConfirm(id) {
@@ -175,27 +173,27 @@ async function closeConfirmModal() {
 }
 
 async function moveUp(id) {
-  const tasks = document.getElementById("tasks-list");
-  const card = tasks.querySelector(`[data-id='${id}']`);
+  const table = document.getElementById("table-body");
+  const tableRow = table.querySelector(`[data-id='${id}']`);
 
-  if (!card) return;
+  if (!tableRow) return;
 
-  const prev = card.previousElementSibling;
+  const prev = tableRow.previousElementSibling;
   if (prev) {
-    tasks.insertBefore(card, prev);
+    table.insertBefore(tableRow, prev);
     updateTasksOrder();
   }
 }
 
 async function moveDown(id) {
-  const tasks = document.getElementById("tasks-list");
-  const card = tasks.querySelector(`[data-id='${id}']`);
+  const table = document.getElementById("table-body");
+  const tableRow = tasks.querySelector(`[data-id='${id}']`);
 
-  if (!card) return;
+  if (!tableRow) return;
 
-  const next = card.nextElementSibling;
+  const next = tableRow.nextElementSibling;
   if (next) {
-    tasks.insertBefore(next, card);
+    table.insertBefore(next, card);
     updateTasksOrder();
   }
 }

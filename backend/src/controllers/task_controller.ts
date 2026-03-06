@@ -20,7 +20,13 @@ class TaskController {
     try {
       const { name, cost, deadline } = req.body;
 
-      if (!name || cost == null || !deadline) {
+      const parsedDeadline = new Date(deadline);
+      if (isNaN(parsedDeadline.getTime())) {
+        return res.status(400).json({ error: "Data limite inválida" });
+      }
+
+      if (!name || cost == null) {
+        console.log(`teste => ${deadline == ""}`);
         return res.status(400).json({ error: "O nome, custo e data limite da tarefa são obrigatórios" });
       } 
 

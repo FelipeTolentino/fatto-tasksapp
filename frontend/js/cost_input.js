@@ -8,11 +8,18 @@ const formatter = new Intl.NumberFormat("pt-BR", {
 });
 
 function formatCurrency(e) {
-  let value = e.target.value;
+  let value = e.target.value.replace(/\D/g, "");
 
-  value = value.replace(/\D/g, "");
-  
-  value = (Number(value) / 100);
+  if (value.length > 15) value = value.slice(0, 15);
 
-  e.target.value = formatter.format(value);
+  value = value.padStart(3, '0');
+
+  const intPart = value.slice(0, -2);
+  const decPart = value.slice(-2);
+
+  const intCleaned = intPart.replace(/^0+/, "") || "0";
+
+  const intFormated = intCleaned.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+  e.target.value = `R$ ${intFormated},${decPart}`;
 }
